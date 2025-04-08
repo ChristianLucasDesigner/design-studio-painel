@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "pages/**/*", "use": "@vercel/static" },
+    { "src": "api/**/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/pages/$1" }
+  ],
+  "env": {
+    "NOTION_API_KEY": "@notion_api_key",
+    "NOTION_DATABASE_ID": "@notion_database_id"
+  }
+} 

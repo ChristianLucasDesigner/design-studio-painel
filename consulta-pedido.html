@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consulta de Pedido - Design Studio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #6B46C1;
+      --primary-light: #9F7AEA;
+      --primary-dark: #553C9A;
+      --secondary-color: #6B46C1;
+      --dark-color: #1A202C;
+      --light-color: #FFFFFF;
+      --gradient: linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%);
+      --card-bg: #F7FAFC;
+      --text-dark: #2D3748;
+      --text-light: #718096;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo i {
+      font-size: 1.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-link.active {
+      color: var(--primary-color);
+    }
+
+    .consult-container {
+      max-width: 600px;
+      margin: 100px auto 40px;
+      padding: 0 20px;
+    }
+
+    .consult-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .consult-header h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .consult-header p {
+      color: var(--text-light);
+    }
+
+    .consult-form {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(107, 70, 193, 0.2);
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+    }
+
+    .form-button {
+      width: 100%;
+      padding: 12px;
+      background: var(--gradient);
+      color: var(--light-color);
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .form-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(107, 70, 193, 0.2);
+    }
+
+    .order-details {
+      display: none;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      margin-top: 30px;
+    }
+
+    .order-details.show {
+      display: block;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(107, 70, 193, 0.1);
+    }
+
+    .order-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .order-status {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .status-pending {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .status-in-progress {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+
+    .status-completed {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+
+    .order-info {
+      margin-bottom: 20px;
+    }
+
+    .info-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .info-label {
+      color: var(--text-light);
+    }
+
+    .info-value {
+      font-weight: 500;
+    }
+
+    .order-timeline {
+      margin-top: 30px;
+    }
+
+    .timeline-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(107, 70, 193, 0.1);
+    }
+
+    .timeline-date {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      min-width: 100px;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-status {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .timeline-description {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .error-message {
+      color: #DC2626;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      text-align: center;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .consult-container {
+        margin-top: 80px;
+      }
+
+      .consult-header h1 {
+        font-size: 2rem;
+      }
+
+      .order-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav-container">
+    <div class="nav-content">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-palette"></i>
+        <span>Design Studio</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Pacotes</a>
+        <a href="artes.html" class="nav-link">Artes</a>
+        <a href="sobre.html" class="nav-link">Sobre Mim</a>
+        <a href="contato.html" class="nav-link">Contato</a>
+        <a href="consulta-pedido.html" class="nav-link active">Meu Pedido</a>
+        <a href="painel.html" class="nav-link admin">Painel Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="consult-container">
+    <div class="consult-header">
+      <h1>Consulta de Pedido</h1>
+      <p>Digite o código do seu pedido para acompanhar o status</p>
+    </div>
+
+    <form class="consult-form" id="consultForm">
+      <div class="form-group">
+        <label class="form-label" for="orderCode">Código do Pedido</label>
+        <input type="text" id="orderCode" class="form-input" placeholder="Digite o código do seu pedido" required>
+      </div>
+      <button type="submit" class="form-button">Consultar Pedido</button>
+      <div class="error-message" id="errorMessage">Pedido não encontrado. Verifique o código e tente novamente.</div>
+    </form>
+
+    <div class="order-details" id="orderDetails">
+      <div class="order-header">
+        <div class="order-title">Pedido #12345</div>
+        <div class="order-status status-pending">Pendente</div>
+      </div>
+
+      <div class="order-info">
+        <div class="info-group">
+          <span class="info-label">Pacote:</span>
+          <span class="info-value">Criação de Logotipo</span>
+        </div>
+        <div class="info-group">
+          <span class="info-label">Preço:</span>
+          <span class="info-value">R$ 80,00</span>
+        </div>
+        <div class="info-group">
+          <span class="info-label">Data do Pedido:</span>
+          <span class="info-value">01/01/2024</span>
+        </div>
+        <div class="info-group">
+          <span class="info-label">Cliente:</span>
+          <span class="info-value">João Silva</span>
+        </div>
+        <div class="info-group">
+          <span class="info-label">Email:</span>
+          <span class="info-value">joao@exemplo.com</span>
+        </div>
+        <div class="info-group">
+          <span class="info-label">Telefone:</span>
+          <span class="info-value">(11) 99999-9999</span>
+        </div>
+      </div>
+
+      <div class="order-timeline">
+        <div class="timeline-title">Histórico do Pedido</div>
+        <div class="timeline-item">
+          <div class="timeline-date">01/01/2024</div>
+          <div class="timeline-content">
+            <div class="timeline-status">Pedido Recebido</div>
+            <div class="timeline-description">Seu pedido foi registrado e está em análise.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">02/01/2024</div>
+          <div class="timeline-content">
+            <div class="timeline-status">Em Andamento</div>
+            <div class="timeline-description">Iniciando o desenvolvimento do seu projeto.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('consultForm');
+      const orderDetails = document.getElementById('orderDetails');
+      const errorMessage = document.getElementById('errorMessage');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const orderCode = document.getElementById('orderCode').value;
+        
+        // Aqui você faria a chamada para a API do Notion
+        // Por enquanto, vamos simular uma resposta
+        if (orderCode === '12345') {
+          orderDetails.classList.add('show');
+          errorMessage.classList.remove('show');
+        } else {
+          orderDetails.classList.remove('show');
+          errorMessage.classList.add('show');
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pacotes para Influencers</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #6B46C1;
+      --primary-light: #9F7AEA;
+      --primary-dark: #553C9A;
+      --secondary-color: #6B46C1;
+      --dark-color: #1A202C;
+      --light-color: #FFFFFF;
+      --gradient: linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%);
+      --card-bg: #F7FAFC;
+      --text-dark: #2D3748;
+      --text-light: #718096;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 38.2% 50%, rgba(107, 70, 193, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 61.8% 50%, rgba(159, 122, 234, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(107, 70, 193, 0.04) 0%, rgba(159, 122, 234, 0.04) 100%);
+      z-index: -1;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at center, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 50% 0%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 0% 50%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 100% 50%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 50% 100%, transparent 0%, rgba(26, 32, 44, 0.12) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo i {
+      font-size: 1.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--primary-color);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    header {
+      margin-top: 70px;
+      background: var(--gradient);
+      color: var(--light-color);
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,0 C77.614,0 100,22.386 100,50 C100,77.614 77.614,100 50,100 C22.386,100 0,77.614 0,50 C0,22.386 22.386,0 50,0 Z" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></svg>') repeat,
+        linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+      opacity: 0.1;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .packages-container {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 30px;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .package-card {
+      min-width: 350px;
+      flex-shrink: 0;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid rgba(107, 70, 193, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-discount-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      color: var(--primary-color);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+
+    .package-card.hot .top-discount-tag {
+      left: auto;
+      right: 100px;
+    }
+
+    .hot-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #ff4d4d 0%, #ff0000 100%);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+      animation: burn 2s infinite;
+    }
+
+    .hot-tag::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+      animation: shine 2s infinite;
+    }
+
+    @keyframes burn {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .package-card.hot {
+      border: 1px solid rgba(255, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.1);
+    }
+
+    .package-card.hot:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(255, 0, 0, 0.15);
+    }
+
+    .package-card.hot .package-price.highlight {
+      background: linear-gradient(135deg, #ff4d4d 0%, #ff0000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--light-color);
+      border: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-button:hover {
+      background: var(--primary-color);
+      color: var(--light-color);
+    }
+
+    .carousel-button.prev {
+      left: -20px;
+    }
+
+    .carousel-button.next {
+      right: -20px;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .carousel-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(107, 70, 193, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-indicator.active {
+      background: var(--primary-color);
+      transform: scale(1.2);
+    }
+
+    .package-icon {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      text-shadow: 0 2px 4px rgba(107, 70, 193, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: rgba(107, 70, 193, 0.1);
+      border-radius: 50%;
+      margin: 0 auto 15px;
+    }
+
+    .package-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--dark-color);
+      text-align: center;
+    }
+
+    .package-description {
+      color: var(--text-light);
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .package-features {
+      list-style: none;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .package-features li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+    }
+
+    .package-features li i {
+      color: var(--primary-color);
+      margin-right: 8px;
+      font-size: 1rem;
+    }
+
+    .package-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    .package-price.highlight {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(107, 70, 193, 0.1);
+      padding: 5px 0;
+      margin: 20px 0 5px 0;
+    }
+
+    .original-price {
+      font-size: 1rem;
+      color: var(--text-light);
+      text-decoration: line-through;
+      margin-bottom: 15px;
+      text-align: center;
+      display: block;
+    }
+
+    .discount-tag {
+      display: inline-block;
+      background: white;
+      color: var(--primary-color);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      background: var(--gradient);
+      color: var(--light-color);
+      text-align: center;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(107, 70, 193, 0.2);
+    }
+
+    .package-extras {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(107, 70, 193, 0.1);
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .package-extras strong {
+      color: var(--primary-color);
+    }
+
+    .package-card.expanded {
+      transform: scale(1.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+
+    .package-card.expanded .package-icon {
+      transform: scale(1.1);
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .package-card.expanded .package-title {
+      font-size: 1.3rem;
+      transition: font-size 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .package-card.expanded .package-description {
+      font-size: 1rem;
+      transition: font-size 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .package-card.expanded .package-features li {
+      font-size: 0.95rem;
+      transition: font-size 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .package-card.expanded .contact-btn {
+      padding: 10px 25px;
+      font-size: 1rem;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(3px);
+      z-index: 99;
+      display: none;
+      transition: background-color 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--gradient);
+      color: var(--light-color);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .package-card.expanded .close-btn {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .close-btn:hover {
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 40px 20px;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .package-card {
+        min-width: 300px;
+      }
+
+      .carousel-button {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    .footer {
+      background: var(--dark-color);
+      color: var(--light-color);
+      padding: 40px 20px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-section h3 {
+      color: var(--primary-light);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-section p {
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      color: var(--light-color);
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-light);
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+
+    .footer-section ul li i {
+      margin-right: 10px;
+      color: var(--primary-light);
+    }
+
+    .footer-section a {
+      color: var(--light-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary-light);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <nav class="nav-container">
+    <div class="nav-content">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-palette"></i>
+        <span>Design Studio</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">Pacotes</a>
+        <a href="artes.html" class="nav-link">Artes</a>
+        <a href="sobre.html" class="nav-link">Sobre Mim</a>
+        <a href="contato.html" class="nav-link">Contato</a>
+        <a href="consulta-pedido.html" class="nav-link">Meu Pedido</a>
+        <a href="painel.html" class="nav-link admin">Painel Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Pacotes de todos os modos e do seu jeito</h1>
+    <p>Sua marca pessoal começa com um design que se destaca!</p>
+  </header>
+
+  <div class="packages-container">
+    <div class="carousel">
+      <div class="carousel-track">
+        <!-- Logotipo -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Criação/Recriação de Logotipo</h3>
+          <div class="package-price highlight">R$ 80,00</div>
+          <div class="original-price">R$ 95,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Logo em vetor</li>
+            <li><i class="fas fa-check"></i> Arquivos em alta resolução</li>
+            <li><i class="fas fa-check"></i> Versões em preto e branco</li>
+            <li><i class="fas fa-check"></i> Manual básico de aplicação</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Flyer -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Flyer</h3>
+          <div class="package-price highlight">R$ 100,00</div>
+          <div class="original-price">R$ 120,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Design profissional</li>
+            <li><i class="fas fa-check"></i> Arquivo em alta resolução</li>
+            <li><i class="fas fa-check"></i> Versões para impressão e digital</li>
+            <li><i class="fas fa-check"></i> Revisões inclusas</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Posts Social Media -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Posts Social Media</h3>
+          <div class="package-price highlight">R$ 90,00</div>
+          <div class="original-price">R$ 105,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Arquivo PSD editável</li>
+            <li><i class="fas fa-check"></i> Otimizado para redes sociais</li>
+            <li><i class="fas fa-check"></i> Design moderno e atraente</li>
+            <li><i class="fas fa-check"></i> Compatível com Instagram e Facebook</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Apresentação de Produto -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Apresentação de Produto</h3>
+          <div class="package-price highlight">R$ 120,00</div>
+          <div class="original-price">R$ 140,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Arquivo PSD editável</li>
+            <li><i class="fas fa-check"></i> Layout profissional</li>
+            <li><i class="fas fa-check"></i> Destaque para características do produto</li>
+            <li><i class="fas fa-check"></i> Versões para diferentes formatos</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Cartões -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Cartões</h3>
+          <div class="package-price highlight">R$ 120,00</div>
+          <div class="original-price">R$ 140,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> 2 unidades</li>
+            <li><i class="fas fa-check"></i> Design personalizado</li>
+            <li><i class="fas fa-check"></i> Arquivos para impressão</li>
+            <li><i class="fas fa-check"></i> Versões digital e física</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Website -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Website</h3>
+          <div class="package-price highlight">R$ 848,30</div>
+          <div class="original-price">R$ 998,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Design responsivo</li>
+            <li><i class="fas fa-check"></i> Otimizado para SEO</li>
+            <li><i class="fas fa-check"></i> Integração com redes sociais</li>
+            <li><i class="fas fa-check"></i> Suporte técnico básico</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Capa para Destaques -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Capa para Destaques</h3>
+          <div class="package-price highlight">R$ 90,00</div>
+          <div class="original-price">R$ 105,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> 5 unidades</li>
+            <li><i class="fas fa-check"></i> Design personalizado</li>
+            <li><i class="fas fa-check"></i> Otimizado para Instagram</li>
+            <li><i class="fas fa-check"></i> Arquivos em alta resolução</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Pacote Influencer Junior -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Pacote Influencer Junior</h3>
+          <div class="package-price highlight">R$ 120,00</div>
+          <div class="original-price">R$ 140,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Logo Vetor</li>
+            <li><i class="fas fa-check"></i> 1 Post Feed</li>
+            <li><i class="fas fa-check"></i> Paleta de cores</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Pacote Influencer Pleno -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Pacote Influencer Pleno</h3>
+          <div class="package-price highlight">R$ 220,00</div>
+          <div class="original-price">R$ 260,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Logo Vetor</li>
+            <li><i class="fas fa-check"></i> 2 Posts Feed</li>
+            <li><i class="fas fa-check"></i> Capas de Destaques</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Pacote Influencer Sênior -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Pacote Influencer Sênior</h3>
+          <div class="package-price highlight">R$ 275,00</div>
+          <div class="original-price">R$ 325,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Logo Vetor</li>
+            <li><i class="fas fa-check"></i> 4 Storys</li>
+            <li><i class="fas fa-check"></i> 3 Posts Feed</li>
+            <li><i class="fas fa-check"></i> Capas de Destaques</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Pacote YouTuber do Ano -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Pacote YouTuber do Ano</h3>
+          <div class="package-price highlight">R$ 220,00</div>
+          <div class="original-price">R$ 260,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Capa para Canal</li>
+            <li><i class="fas fa-check"></i> 3 Thumbnails</li>
+            <li><i class="fas fa-check"></i> Foto de Perfil</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+
+        <!-- Pacote Criador de Sucesso -->
+        <div class="package-card">
+          <div class="top-discount-tag">15% OFF</div>
+          <h3>Pacote Criador de Sucesso</h3>
+          <div class="package-price highlight">R$ 440,00</div>
+          <div class="original-price">R$ 520,00</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Tudo do Pacote Sênior</li>
+            <li><i class="fas fa-check"></i> + Pacote YT</li>
+            <li><i class="fas fa-check"></i> Melhor custo-benefício</li>
+          </ul>
+          <a href="https://tally.so/r/w2oMMD" target="_blank" class="contact-btn">Quero este!</a>
+        </div>
+      </div>
+
+      <button class="carousel-button prev" aria-label="Anterior">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-button next" aria-label="Próximo">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <div class="carousel-indicators">
+        <span class="carousel-indicator active"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+        <span class="carousel-indicator"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const track = document.querySelector('.carousel-track');
+      const cards = document.querySelectorAll('.package-card');
+      const prevButton = document.querySelector('.carousel-button.prev');
+      const nextButton = document.querySelector('.carousel-button.next');
+      const indicators = document.querySelectorAll('.carousel-indicator');
+      
+      let currentIndex = 0;
+      const cardWidth = cards[0].offsetWidth + 30; // Inclui o gap
+      const totalCards = cards.length;
+
+      // Clona os primeiros e últimos cards para o efeito infinito
+      const firstCardClone = cards[0].cloneNode(true);
+      const lastCardClone = cards[totalCards - 1].cloneNode(true);
+      track.appendChild(firstCardClone);
+      track.insertBefore(lastCardClone, cards[0]);
+
+      // Ajusta a posição inicial para mostrar o primeiro card real
+      track.style.transform = `translateX(-${cardWidth}px)`;
+      
+      function updateCarousel(transition = true) {
+        track.style.transition = transition ? 'transform 0.5s ease-in-out' : 'none';
+        track.style.transform = `translateX(-${(currentIndex + 1) * cardWidth}px)`;
+        
+        // Atualiza indicadores
+        indicators.forEach((indicator, index) => {
+          indicator.classList.toggle('active', index === currentIndex);
+        });
+      }
+
+      function slideNext() {
+        if (currentIndex >= totalCards - 1) {
+          currentIndex = -1;
+          track.style.transition = 'none';
+          track.style.transform = `translateX(-${cardWidth}px)`;
+          track.offsetHeight; // Force reflow
+        }
+        currentIndex++;
+        requestAnimationFrame(() => {
+          track.style.transition = 'transform 0.5s ease-in-out';
+          updateCarousel();
+        });
+      }
+
+      function slidePrev() {
+        if (currentIndex <= -1) {
+          currentIndex = totalCards - 1;
+          track.style.transition = 'none';
+          track.style.transform = `translateX(-${(totalCards) * cardWidth}px)`;
+          track.offsetHeight; // Force reflow
+        }
+        currentIndex--;
+        requestAnimationFrame(() => {
+          track.style.transition = 'transform 0.5s ease-in-out';
+          updateCarousel();
+        });
+      }
+
+      prevButton.addEventListener('click', slidePrev);
+      nextButton.addEventListener('click', slideNext);
+
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          currentIndex = index;
+          updateCarousel();
+        });
+      });
+
+      // Touch events para mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      track.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      track.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) {
+          slideNext();
+        } else if (touchEndX - touchStartX > 50) {
+          slidePrev();
+        }
+      });
+
+      // Auto play
+      let autoPlayInterval = setInterval(slideNext, 3000);
+
+      // Pausa o autoplay quando o mouse está sobre o carrossel
+      track.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+      });
+
+      track.addEventListener('mouseleave', () => {
+        autoPlayInterval = setInterval(slideNext, 3000);
+      });
+
+      // Inicialização
+      updateCarousel(false);
+    });
+  </script>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Design Studio</h3>
+        <p>Transformando ideias em realidade através do design.</p>
+        <div class="social-links">
+          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Links Rápidos</h3>
+        <ul>
+          <li><a href="index.html">Pacotes</a></li>
+          <li><a href="artes.html">Artes</a></li>
+          <li><a href="sobre.html">Sobre Mim</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contato</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> contato@designstudio.com</li>
+          <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+          <li><i class="fas fa-map-marker-alt"></i> São Paulo, SP</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 Design Studio. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

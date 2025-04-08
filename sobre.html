@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre Mim - Design Studio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #6B46C1;
+      --primary-light: #9F7AEA;
+      --primary-dark: #553C9A;
+      --secondary-color: #6B46C1;
+      --dark-color: #1A202C;
+      --light-color: #FFFFFF;
+      --gradient: linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%);
+      --card-bg: #F7FAFC;
+      --text-dark: #2D3748;
+      --text-light: #718096;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 38.2% 50%, rgba(107, 70, 193, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 61.8% 50%, rgba(159, 122, 234, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(107, 70, 193, 0.04) 0%, rgba(159, 122, 234, 0.04) 100%);
+      z-index: -1;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at center, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 50% 0%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 0% 50%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 100% 50%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 50% 100%, transparent 0%, rgba(26, 32, 44, 0.12) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo i {
+      font-size: 1.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--primary-color);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .sobre-header {
+      margin-top: 70px;
+      background: var(--gradient);
+      color: var(--light-color);
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .sobre-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .sobre-header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .sobre-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .sobre-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sobre-content {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(107, 70, 193, 0.1);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+    }
+
+    .sobre-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sobre-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient);
+    }
+
+    .sobre-content h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .sobre-content p {
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+
+    .bio-header {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .profile-image {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.5s ease;
+      border: 4px solid var(--light-color);
+      flex-shrink: 0;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
+    }
+
+    .bio-title {
+      flex-grow: 1;
+    }
+
+    .bio-title h2 {
+      margin-bottom: 10px;
+    }
+
+    .skills-container {
+      margin-top: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s;
+    }
+
+    .skills-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skills-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      background: rgba(107, 70, 193, 0.05);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .skill-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill-item:nth-child(1) { transition-delay: 0.2s; }
+    .skill-item:nth-child(2) { transition-delay: 0.4s; }
+    .skill-item:nth-child(3) { transition-delay: 0.6s; }
+    .skill-item:nth-child(4) { transition-delay: 0.8s; }
+    .skill-item:nth-child(5) { transition-delay: 1s; }
+    .skill-item:nth-child(6) { transition-delay: 1.2s; }
+
+    .skill-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(107, 70, 193, 0.1);
+    }
+
+    .skill-item i {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .skill-item span {
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(107, 70, 193, 0.1);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      transform-origin: center center;
+    }
+
+    .skill-card.expanded {
+      transform: scale(1.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+
+    .skill-card.expanded .skill-icon {
+      transform: scale(1.1);
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .skill-card.expanded .skill-title {
+      font-size: 1.3rem;
+      transition: font-size 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .skill-card.expanded .skill-description {
+      font-size: 1rem;
+      transition: font-size 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(3px);
+      z-index: 99;
+      display: none;
+      transition: background-color 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--gradient);
+      color: var(--light-color);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .skill-card.expanded .close-btn {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .close-btn:hover {
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .bio-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile-image {
+        width: 180px;
+        height: 180px;
+      }
+
+      .bio-title {
+        text-align: center;
+      }
+
+      .sobre-container {
+        grid-template-columns: 1fr;
+      }
+
+      .sobre-header {
+        padding: 40px 20px;
+      }
+
+      .sobre-header h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .language-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      background: var(--gradient);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      color: var(--light-color);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 0 4px 10px rgba(107, 70, 193, 0.2);
+    }
+
+    .language-switch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(107, 70, 193, 0.3);
+    }
+
+    .language-switch i {
+      font-size: 1.2rem;
+    }
+
+    .content-en {
+      display: none;
+    }
+
+    .content-pt {
+      display: block;
+    }
+
+    .showing-en .content-en {
+      display: block;
+    }
+
+    .showing-en .content-pt {
+      display: none;
+    }
+
+    hr {
+      margin: 30px 0;
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <nav class="nav-container">
+    <div class="nav-content">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-palette"></i>
+        <span>Design Studio</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Pacotes</a>
+        <a href="artes.html" class="nav-link">Artes</a>
+        <a href="sobre.html" class="nav-link active">Sobre Mim</a>
+        <a href="contato.html" class="nav-link">Contato</a>
+        <a href="consulta-pedido.html" class="nav-link">Meu Pedido</a>
+        <a href="painel.html" class="nav-link admin">Painel Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="sobre-header">
+    <h1>Sobre Mim</h1>
+    <p>Conheça um pouco mais sobre minha jornada no design</p>
+  </header>
+
+  <div class="sobre-container">
+    <div class="sobre-content">
+      <button class="language-switch" id="languageToggle">
+        <i class="fas fa-globe"></i>
+        <span class="switch-text">Switch to English</span>
+      </button>
+
+      <div class="content-pt">
+        <div class="bio-header">
+          <img src="assets/profile/profile.jpg" alt="Christian Lucas - Designer" class="profile-image">
+          <div class="bio-title">
+            <h2>Olá, sou Christian Lucas!</h2>
+          </div>
+        </div>
+        <p>Sou designer gráfico, atualmente no último semestre da graduação, com 20 anos e uma paixão real por transformar ideias em experiências visuais únicas e impactantes. Atuo na área de TI e venho me especializando em design para mídias sociais e identidade visual, com certificações em cursos voltados para web e UI design.</p>
+        
+        <p>Minha missão é ajudar influenciadores, marcas e criadores de conteúdo a construírem uma presença visual forte, estratégica e consistente nas redes sociais, utilizando um design moderno, funcional e alinhado à identidade de cada cliente.</p>
+        
+        <p>Tenho experiência prática no desenvolvimento de conteúdos para Instagram, como posts e stories personalizados, além da criação de logotipos, paletas de cores, identidade visual completa, banners, flyers e panfletos. Cada projeto é pensado com atenção aos detalhes e voltado para gerar impacto e conexão com o público.</p>
+        
+        <p>Atualmente moro em Brasília, mas atendo clientes de todo o Brasil. Estou sempre em busca de novos desafios e oportunidades de crescer junto com as marcas que confiam no meu trabalho.</p>
+      </div>
+
+      <div class="content-en">
+        <div class="bio-header">
+          <img src="assets/profile/profile.jpg" alt="Christian Lucas - Designer" class="profile-image">
+          <div class="bio-title">
+            <h2>Hi, I'm Christian Lucas!</h2>
+          </div>
+        </div>
+        <p>I'm a 20-year-old graphic designer in the final semester of my degree, passionate about turning ideas into unique and impactful visual experiences. I work in the IT field and specialize in social media design and visual identity, with certifications in web and UI design courses.</p>
+        
+        <p>My mission is to help influencers, brands, and content creators build a strong, strategic, and consistent visual presence on social media through modern, functional design tailored to each identity.</p>
+        
+        <p>I have hands-on experience creating content for Instagram — including custom posts and stories — as well as logos, color palettes, full brand identities, banners, flyers, and promotional materials. Every project is crafted with attention to detail and a focus on creating real visual impact and audience connection.</p>
+        
+        <p>I'm based in Brasília, Brazil, but I work with clients from all over the country. I'm always open to new challenges and opportunities to grow alongside the brands that trust in my work.</p>
+      </div>
+
+      <div class="skills-container">
+        <h3 class="skills-title">Minhas Habilidades</h3>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <i class="fas fa-palette"></i>
+            <span>Design para Mídias Sociais</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-pen-nib"></i>
+            <span>Identidade Visual</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-desktop"></i>
+            <span>Web Design</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span>UI Design</span>
+          </div>
+          <div class="skill-item">
+            <i class="fab fa-instagram"></i>
+            <span>Posts e Stories</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-vector-square"></i>
+            <span>Logotipos</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-swatchbook"></i>
+            <span>Paletas de Cores</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-object-group"></i>
+            <span>Banners e Flyers</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-code"></i>
+            <span>TI</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Design Gráfico</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.skill-card');
+      const overlay = document.querySelector('.overlay');
+      const sobreContainer = document.querySelector('.sobre-container');
+      const sobreContent = document.querySelector('.sobre-content');
+      const skillsContainer = document.querySelector('.skills-container');
+      const skillItems = document.querySelectorAll('.skill-item');
+      let expandedCard = null;
+
+      // Função para verificar se um elemento está visível na tela
+      function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+        
+        return (
+          rect.top <= windowHeight * 1.5 && // 150% da altura da janela
+          rect.bottom >= -windowHeight * 0.5 && // 50% acima da janela
+          rect.left <= windowWidth &&
+          rect.right >= 0
+        );
+      }
+
+      // Função para adicionar classe visible aos elementos
+      function handleScroll() {
+        if (sobreContainer) {
+          sobreContainer.classList.add('visible');
+          sobreContent.classList.add('visible');
+          skillsContainer.classList.add('visible');
+        }
+
+        skillItems.forEach(item => {
+          if (isElementInViewport(item)) {
+            item.classList.add('visible');
+          }
+        });
+
+        cards.forEach(card => {
+          if (isElementInViewport(card)) {
+            card.classList.add('visible');
+          }
+        });
+      }
+
+      // Adicionar evento de scroll
+      window.addEventListener('scroll', handleScroll);
+      // Verificar elementos visíveis no carregamento
+      handleScroll();
+
+      cards.forEach(card => {
+        const closeBtn = document.createElement('div');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+        card.appendChild(closeBtn);
+
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('.close-btn')) return;
+          
+          if (expandedCard) {
+            expandedCard.classList.remove('expanded');
+            overlay.style.display = 'none';
+            expandedCard = null;
+          } else {
+            this.classList.add('expanded');
+            overlay.style.display = 'block';
+            expandedCard = this;
+          }
+        });
+
+        closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          card.classList.remove('expanded');
+          overlay.style.display = 'none';
+          expandedCard = null;
+        });
+      });
+
+      overlay.addEventListener('click', function() {
+        if (expandedCard) {
+          expandedCard.classList.remove('expanded');
+          overlay.style.display = 'none';
+          expandedCard = null;
+        }
+      });
+
+      // Adiciona funcionalidade de troca de idioma
+      const languageToggle = document.getElementById('languageToggle');
+      const switchText = languageToggle.querySelector('.switch-text');
+      
+      languageToggle.addEventListener('click', function() {
+        sobreContent.classList.toggle('showing-en');
+        if (sobreContent.classList.contains('showing-en')) {
+          switchText.textContent = 'Mudar para Português';
+        } else {
+          switchText.textContent = 'Switch to English';
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

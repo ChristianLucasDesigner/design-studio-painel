@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artes - Design Studio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #6B46C1;
+      --primary-light: #9F7AEA;
+      --primary-dark: #553C9A;
+      --secondary-color: #6B46C1;
+      --dark-color: #1A202C;
+      --light-color: #FFFFFF;
+      --gradient: linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%);
+      --card-bg: #F7FAFC;
+      --text-dark: #2D3748;
+      --text-light: #718096;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 38.2% 50%, rgba(107, 70, 193, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 61.8% 50%, rgba(159, 122, 234, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(107, 70, 193, 0.04) 0%, rgba(159, 122, 234, 0.04) 100%);
+      z-index: -1;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at center, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 50% 0%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 0% 50%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 100% 50%, transparent 0%, rgba(26, 32, 44, 0.12) 100%),
+        radial-gradient(circle at 50% 100%, transparent 0%, rgba(26, 32, 44, 0.12) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo i {
+      font-size: 1.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--primary-color);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .artes-header {
+      margin-top: 70px;
+      background: var(--gradient);
+      color: var(--light-color);
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .artes-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .artes-header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .artes-container {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .artes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .arte-card {
+      background: var(--light-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      position: relative;
+      border: 1px solid rgba(107, 70, 193, 0.1);
+      height: 100%;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .arte-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .arte-image-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .arte-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .arte-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(107, 70, 193, 0.15);
+    }
+
+    .arte-card:hover .arte-image {
+      transform: scale(1.2);
+    }
+
+    .arte-info {
+      padding: 20px;
+      background: var(--light-color);
+      position: relative;
+      z-index: 2;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .arte-categoria {
+      display: inline-block;
+      background: rgba(107, 70, 193, 0.1);
+      color: var(--primary-color);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .arte-titulo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--dark-color);
+    }
+
+    .arte-descricao {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .arte-carousel {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--light-color);
+      margin-bottom: 15px;
+    }
+
+    .art-card.expanded .arte-carousel {
+      height: 400px;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--primary-color);
+      transform: scale(1.2);
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      z-index: 2;
+    }
+
+    .carousel-nav button {
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--primary-color);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-nav button:hover {
+      background: var(--primary-color);
+      color: var(--light-color);
+    }
+
+    .arte-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(107, 70, 193, 0.1);
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .arte-data {
+      color: var(--text-light);
+    }
+
+    .arte-likes {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .arte-likes:hover {
+      color: var(--primary-color);
+    }
+
+    .arte-likes i {
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 1200px) {
+      .artes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .artes-header {
+        padding: 30px 15px;
+        margin-top: 50px;
+      }
+
+      .artes-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .artes-header p {
+        font-size: 1rem;
+      }
+
+      .artes-container {
+        margin: 20px auto;
+        padding: 0 15px;
+      }
+
+      .artes-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .arte-image {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .artes-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .artes-header p {
+        font-size: 0.9rem;
+      }
+
+      .arte-image {
+        height: 200px;
+      }
+    }
+
+    .categorias-filtro {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .categoria-btn {
+      padding: 8px 16px;
+      border: 2px solid var(--primary-color);
+      background: transparent;
+      color: var(--primary-color);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .categoria-btn:hover {
+      background: var(--primary-color);
+      color: var(--light-color);
+    }
+
+    .categoria-btn.active {
+      background: var(--primary-color);
+      color: var(--light-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <nav class="nav-container">
+    <div class="nav-content">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-palette"></i>
+        <span>Design Studio</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Pacotes</a>
+        <a href="artes.html" class="nav-link active">Artes</a>
+        <a href="sobre.html" class="nav-link">Sobre Mim</a>
+        <a href="contato.html" class="nav-link">Contato</a>
+        <a href="consulta-pedido.html" class="nav-link">Meu Pedido</a>
+        <a href="painel.html" class="nav-link admin">Painel Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="artes-header">
+    <h1>Minhas Artes</h1>
+    <p>Conheça alguns dos meus trabalhos em diferentes categorias</p>
+  </header>
+
+  <div class="artes-container">
+    <div class="categorias-filtro">
+      <button class="categoria-btn active" data-categoria="todos">Todos</button>
+      <button class="categoria-btn" data-categoria="convites">Convites</button>
+      <button class="categoria-btn" data-categoria="catalogos">Catálogos</button>
+    </div>
+    <div class="artes-grid" id="artesGrid">
+      <!-- Arte 1 -->
+      <div class="arte-card" data-categoria="convites">
+        <div class="arte-image-container">
+          <img src="assets/artes/Convite de aniversário clássico.png" alt="Convite de Aniversário" class="arte-image">
+        </div>
+        <div class="arte-info">
+          <span class="arte-categoria">Convites</span>
+          <h3 class="arte-titulo">Convite de Aniversário Clássico</h3>
+          <p class="arte-descricao">Design elegante para convite de aniversário</p>
+        </div>
+      </div>
+
+      <!-- Arte 2 -->
+      <div class="arte-card" data-categoria="convites">
+        <div class="arte-image-container">
+          <img src="assets/artes/Venha Comemorar Meu Niver!.png" alt="Convite de Aniversário Moderno" class="arte-image">
+        </div>
+        <div class="arte-info">
+          <span class="arte-categoria">Convites</span>
+          <h3 class="arte-titulo">Convite de Aniversário Moderno</h3>
+          <p class="arte-descricao">Design moderno e divertido para festa de aniversário</p>
+        </div>
+      </div>
+
+      <!-- Arte 3 -->
+      <div class="arte-card" data-categoria="catalogos">
+        <div class="arte-image-container">
+          <img src="assets/artes/Primeiro catalogo.png" alt="Catálogo" class="arte-image">
+        </div>
+        <div class="arte-info">
+          <span class="arte-categoria">Catálogos</span>
+          <h3 class="arte-titulo">Catálogo de Produtos</h3>
+          <p class="arte-descricao">Design profissional para catálogo de produtos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const arteCards = document.querySelectorAll('.arte-card');
+      const categoriaBtns = document.querySelectorAll('.categoria-btn');
+
+      // Função para verificar se um elemento está visível na tela
+      function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.bottom >= 0
+        );
+      }
+
+      // Função para mostrar os cards
+      function showCards() {
+        arteCards.forEach((card, index) => {
+          if (isElementInViewport(card)) {
+            setTimeout(() => {
+              card.classList.add('visible');
+            }, index * 100);
+          }
+        });
+      }
+
+      // Mostrar cards inicialmente
+      showCards();
+
+      // Verificar ao rolar
+      window.addEventListener('scroll', showCards);
+
+      // Filtro de categorias
+      categoriaBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Atualizar botão ativo
+          categoriaBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const categoria = btn.dataset.categoria;
+          
+          // Filtrar cards
+          arteCards.forEach(card => {
+            if (categoria === 'todos' || card.dataset.categoria === categoria) {
+              card.style.display = '';
+              setTimeout(() => {
+                card.classList.add('visible');
+              }, 100);
+            } else {
+              card.classList.remove('visible');
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 500);
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

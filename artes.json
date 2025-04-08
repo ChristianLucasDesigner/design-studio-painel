@@ -1,0 +1,100 @@
+{
+  "artes": [
+    {
+      "id": 1,
+      "titulo": "Convite de Aniversário Clássico",
+      "descricao": "Convite elegante e sofisticado para festas de aniversário",
+      "imagem": "assets/artes/Arte 1.png",
+      "categoria": "Convites",
+      "data": "2024-01-01"
+    },
+    {
+      "id": 2,
+      "titulo": "Convite de Aniversário Moderno",
+      "descricao": "Design contemporâneo para celebrações especiais",
+      "imagem": "assets/artes/Arte 2.png",
+      "categoria": "Convites",
+      "data": "2024-01-02"
+    },
+    {
+      "id": 3,
+      "titulo": "Convite de Aniversário Infantil",
+      "descricao": "Convite divertido e colorido para festas infantis",
+      "imagem": "assets/artes/Arte 3.png",
+      "categoria": "Convites",
+      "data": "2024-01-03"
+    },
+    {
+      "id": 4,
+      "titulo": "Post Promocional",
+      "descricao": "Post para redes sociais com design moderno",
+      "imagem": "assets/artes/post1.png",
+      "categoria": "Posts",
+      "data": "2024-01-04"
+    },
+    {
+      "id": 5,
+      "titulo": "Cartão de Visitas",
+      "descricao": "Cartão de visitas profissional e elegante",
+      "imagem": "assets/artes/cartao1.png",
+      "categoria": "Cartões",
+      "data": "2024-01-05"
+    },
+    {
+      "id": 6,
+      "titulo": "Logo Minimalista",
+      "descricao": "Logo moderno e minimalista para marca",
+      "imagem": "assets/artes/logo1.png",
+      "categoria": "Logos",
+      "data": "2024-01-06"
+    },
+    {
+      "id": 7,
+      "titulo": "Story Promocional",
+      "descricao": "Story para Instagram com animação",
+      "imagem": "assets/artes/story1.png",
+      "categoria": "Storys",
+      "data": "2024-01-07"
+    },
+    {
+      "id": 8,
+      "titulo": "Destaque de Produto",
+      "descricao": "Destaque para produtos em redes sociais",
+      "imagem": "assets/artes/destaque1.png",
+      "categoria": "Destaques",
+      "data": "2024-01-08"
+    },
+    {
+      "id": 9,
+      "titulo": "Código de Desconto",
+      "descricao": "Design para código promocional",
+      "imagem": "assets/artes/code1.png",
+      "categoria": "Codes",
+      "data": "2024-01-09"
+    },
+    {
+      "id": 10,
+      "titulo": "Mockup de Camiseta",
+      "descricao": "Apresentação realista de design em camiseta",
+      "imagem": "assets/artes/mockup1.png",
+      "categoria": "Mockups",
+      "data": "2024-01-10"
+    },
+    {
+      "id": 11,
+      "titulo": "Mockup de Caneca",
+      "descricao": "Visualização de design em caneca personalizada",
+      "imagem": "assets/artes/mockup2.png",
+      "categoria": "Mockups",
+      "data": "2024-01-11"
+    },
+    {
+      "id": 12,
+      "titulo": "Mockup de Cartão",
+      "descricao": "Apresentação profissional de cartão de visita",
+      "imagem": "assets/artes/mockup3.png",
+      "categoria": "Mockups",
+      "data": "2024-01-12"
+    }
+  ]
+} 
